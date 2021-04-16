@@ -24,4 +24,5 @@ test-070 : 부하를 받는 서버. endpoint인 192.168.0.70:80에 nginx가 있�
 ```sh
 $ ssh user@192.168.0.70
 $ tail -f /var/log/nginx/access.log
+$ top
 ```
