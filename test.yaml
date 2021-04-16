@@ -5,4 +5,5 @@
   vars_files:
     - vars/target67.yaml
   roles:
+    - ab
     - jmeter
