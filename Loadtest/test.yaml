@@ -1,0 +1,8 @@
+---
+- hosts: target67
+  gather_facts: yes
+  strategy: free
+  vars_files:
+    - vars/target67.yaml
+  roles:
+    - jmeter

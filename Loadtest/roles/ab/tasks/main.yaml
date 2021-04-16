@@ -1,0 +1,25 @@
+- name: Creates ab folder
+  become: yes
+  file:
+    path: "{{ ansible_env.HOME }}/ab"
+    state: directory
+
+- name: copy script.plot in ab folder
+  copy:
+    src: script.plot
+    dest: "{{ ansible_env.HOME }}/ab/"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0664
+
+- name: ab test [keepalive = true]
+  when: keepalive == true
+  shell: "ab -n 500 -c 100 -k -g {{ ansible_env.HOME }}/ab/result.plot {{ target_protocol }}://{{ target_domain }}:{{ target_port }}{{ target_path }}"
+
+- name: ab test [keepalive = false]
+  when: keepalive == false
+  shell: "ab -n 500 -c 100 -g {{ ansible_env.HOME }}/ab/result.plot {{ target_protocol }}://{{ target_domain }}:{{ target_port }}{{ target_path }}"
+
+- name: create result.png graph file
+  shell: "gnuplot {{ ansible_env.HOME }}/ab/script.plot"
+

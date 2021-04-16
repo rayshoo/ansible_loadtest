@@ -1,0 +1,4 @@
+target_protocol: http
+target_domain: test68.dragonz.dev
+target_port: 80
+target_path: /echo
